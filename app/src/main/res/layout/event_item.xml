@@ -1,4 +1,3 @@
-<!-- res/layout/event_item.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -28,6 +27,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp"
+        android:textColor="@android:color/black" />
+
+    <!-- New TextViews for Priority and Deadline -->
+    <TextView
+        android:id="@+id/eventPriority"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="Priority: "
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/eventDeadline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="Deadline: "
         android:textColor="@android:color/black" />
 
     <LinearLayout

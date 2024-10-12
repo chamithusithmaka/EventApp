@@ -1,4 +1,3 @@
-// ViewEventsActivity.kt
 package com.example.act4
 
 import android.os.Bundle
@@ -28,16 +27,14 @@ class ViewEventsActivity : AppCompatActivity() {
             eventDatabaseHelper.deleteEvent(eventId)
             refreshEvents()
         }, { event ->
-            // Handle update event using custom dialog
-            val updateDialog = UpdateEventDialog(this, event) { updatedName, updatedDate, updatedDescription ->
+            // Handle update event using custom dialog with priority and deadline
+            val updateDialog = UpdateEventDialog(this, event) { updatedName, updatedDate, updatedDescription, updatedPriority, updatedDeadline ->
                 // Update the event in the database
-                eventDatabaseHelper.updateEvent(event.id, updatedName, updatedDate, updatedDescription)
+                eventDatabaseHelper.updateEvent(event.id, updatedName, updatedDate, updatedDescription, updatedPriority, updatedDeadline)
                 // Refresh the events list
                 refreshEvents()
             }
             updateDialog.show() // Show the update dialog
-            // Handle update event
-            // You can start another activity or a dialog to update the event
         })
 
         recyclerView.adapter = eventAdapter

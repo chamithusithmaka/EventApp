@@ -1,4 +1,3 @@
-// EventAdapter.kt
 package com.example.act4
 
 import Event
@@ -21,35 +20,46 @@ class EventAdapter(
         val eventName: TextView = itemView.findViewById(R.id.eventName)
         val eventDate: TextView = itemView.findViewById(R.id.eventDate)
         val eventDescription: TextView = itemView.findViewById(R.id.eventDescription)
+        val eventPriority: TextView = itemView.findViewById(R.id.eventPriority) // New field for priority
+        val eventDeadline: TextView = itemView.findViewById(R.id.eventDeadline) // New field for deadline
         val updateButton: Button = itemView.findViewById(R.id.updateButton)
         val deleteButton: Button = itemView.findViewById(R.id.deleteButton)
 
+        // Bind event data to the views
         fun bind(event: Event) {
             eventName.text = event.name
             eventDate.text = event.date
             eventDescription.text = event.description
+            eventPriority.text = "Priority: ${event.priority}" // Bind priority
+            eventDeadline.text = "Deadline: ${event.deadline}" // Bind deadline
 
+            // Set update button click listener
             updateButton.setOnClickListener {
-                onUpdateClick(events[adapterPosition]) // Trigger the update function with the current event
+                onUpdateClick(event) // Trigger the update function with the current event
             }
 
+            // Set delete button click listener
             deleteButton.setOnClickListener {
                 onDeleteClick(event.id) // Trigger the delete function with the event ID
             }
         }
     }
 
+    // Inflate the event item layout and return a view holder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.event_item, parent, false)
         return EventViewHolder(view)
     }
 
+    // Bind data to the view holder
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
         holder.bind(events[position])
     }
 
+    // Return the size of the events list
     override fun getItemCount(): Int = events.size
 
+    // Update the list of events and notify the adapter
     fun setEvents(newEvents: List<Event>) {
         events = newEvents
         notifyDataSetChanged()

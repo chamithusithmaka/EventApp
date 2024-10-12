@@ -1,38 +1,50 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <EditText
         android:id="@+id/editTextEventName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Event Name"/>
+        android:hint="Event Name" />
 
     <EditText
         android:id="@+id/editTextEventDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Event Date"/>
+        android:hint="Event Date" />
 
     <EditText
         android:id="@+id/editTextEventDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Event Description"/>
+        android:hint="Event Description" />
+
+    <!-- New EditText fields for Priority and Deadline -->
+    <Spinner
+        android:id="@+id/eventPrioritySpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <EditText
+        android:id="@+id/editTextEventDeadline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Event Deadline" />
 
     <Button
         android:id="@+id/buttonUpdateEvent"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Update Event"/>
+        android:text="Update" />
 
     <Button
         android:id="@+id/buttonCancel"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cancel"/>
-
+        android:text="Cancel"
+        android:layout_marginTop="8dp" />
 </LinearLayout>
