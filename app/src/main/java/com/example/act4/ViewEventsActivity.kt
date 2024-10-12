@@ -1,15 +1,19 @@
 package com.example.act4
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import android.widget.EditText
 
 class ViewEventsActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var eventAdapter: EventAdapter
     private lateinit var eventDatabaseHelper: EventDatabaseHelper
+    private lateinit var searchEditText: EditText // Declare EditText for search
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,6 +22,8 @@ class ViewEventsActivity : AppCompatActivity() {
         eventDatabaseHelper = EventDatabaseHelper(this)
 
         recyclerView = findViewById(R.id.recyclerView)
+        searchEditText = findViewById(R.id.searchEditText) // Initialize the EditText
+
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         // Fetch all events from the database
@@ -27,17 +33,27 @@ class ViewEventsActivity : AppCompatActivity() {
             eventDatabaseHelper.deleteEvent(eventId)
             refreshEvents()
         }, { event ->
-            // Handle update event using custom dialog with priority and deadline
+            // Handle update event
             val updateDialog = UpdateEventDialog(this, event) { updatedName, updatedDate, updatedDescription, updatedPriority, updatedDeadline ->
                 // Update the event in the database
                 eventDatabaseHelper.updateEvent(event.id, updatedName, updatedDate, updatedDescription, updatedPriority, updatedDeadline)
-                // Refresh the events list
                 refreshEvents()
             }
-            updateDialog.show() // Show the update dialog
+            updateDialog.show()
         })
 
         recyclerView.adapter = eventAdapter
+
+        // Add TextWatcher to the search EditText
+        searchEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                eventAdapter.filter.filter(s) // Call filter on the adapter's filter
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
     }
 
     private fun refreshEvents() {
