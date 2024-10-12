@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -54,24 +55,59 @@ class AddEvent : AppCompatActivity() {
             val description = eventDescription.text.toString()
 
             // Perform input validation and save to SQLite
-            if (name.isNotEmpty() && date.isNotEmpty() && description.isNotEmpty()) {
-                // Save event to SQLite database (you'll add this logic later)
-            } else {
-                // Show error message
+            // Add event button click listener
+            addEventButton.setOnClickListener {
+                // Get input values
+                val name = eventName.text.toString()
+                val date = eventDate.text.toString()
+                val description = eventDescription.text.toString()
+
+                // Perform input validation
+                if (name.isNotEmpty() && date.isNotEmpty() && description.isNotEmpty()) {
+                    // Initialize EventDatabaseHelper
+                    val eventDatabaseHelper = EventDatabaseHelper(this)
+
+                    // Save event to SQLite database
+                    val result = eventDatabaseHelper.addEvent(name, date, description)
+
+                    if (result != -1L) { // Check if the insert was successful
+                        // Optionally show a success message
+                        Toast.makeText(this, "Event added successfully!", Toast.LENGTH_SHORT).show()
+                        // Clear input fields after successful addition (optional)
+                        eventName.text.clear()
+                        eventDate.text.clear()
+                        eventDescription.text.clear()
+                    } else {
+                        // Show error message if insertion failed
+                        Toast.makeText(
+                            this,
+                            "Error adding event. Please try again.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                } else {
+                    // Show error message if fields are empty
+                    Toast.makeText(this, "Please fill all fields.", Toast.LENGTH_SHORT).show()
+                }
             }
-        }
 
-        // Clear button click listener
-        clearButton.setOnClickListener {
-            eventName.text.clear()
-            eventDate.text.clear()
-            eventDescription.text.clear()
+            // Clear button click listener
+            clearButton.setOnClickListener {
+                eventName.text.clear()
+                eventDate.text.clear()
+                eventDescription.text.clear()
 
 
-            ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-                val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-                v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-                insets
+                ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+                    val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+                    v.setPadding(
+                        systemBars.left,
+                        systemBars.top,
+                        systemBars.right,
+                        systemBars.bottom
+                    )
+                    insets
+                }
             }
         }
     }
