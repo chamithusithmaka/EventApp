@@ -4,6 +4,7 @@ import Event
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.content.Context
+import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
@@ -19,6 +20,12 @@ class UpdateEventDialog(
 
     init {
         dialog.setContentView(R.layout.dialog_update_event)
+
+        // Set the dialog width to match the parent width
+        dialog.window?.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
 
         // Initialize views
         val editTextEventName = dialog.findViewById<EditText>(R.id.editTextEventName)

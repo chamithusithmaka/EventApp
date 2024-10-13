@@ -8,43 +8,72 @@
         android:id="@+id/editTextEventName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Event Name" />
+        android:hint="Event Name"
+        android:padding="16dp"
+        android:background="@drawable/rounded_edittext"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:layout_margin="5dp" />
 
     <EditText
         android:id="@+id/editTextEventDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Event Date" />
+        android:hint="Event Date"
+        android:padding="16dp"
+        android:background="@drawable/rounded_edittext"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:layout_margin="5dp" />
 
     <EditText
         android:id="@+id/editTextEventDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Event Description" />
+        android:hint="Event Description"
+        android:padding="16dp"
+        android:background="@drawable/rounded_edittext"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:layout_margin="5dp" />
 
-    <!-- New EditText fields for Priority and Deadline -->
     <Spinner
         android:id="@+id/eventPrioritySpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:padding="16dp"
+        android:background="@drawable/rounded_edittext"
+        android:layout_margin="5dp" />
 
     <EditText
         android:id="@+id/editTextEventDeadline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Event Deadline" />
+        android:hint="Event Deadline"
+        android:padding="16dp"
+        android:background="@drawable/rounded_edittext"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:layout_margin="5dp" />
 
     <Button
         android:id="@+id/buttonUpdateEvent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Update" />
+        android:text="Update"
+        android:padding="12dp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/rounded_button"
+        android:layout_margin="5dp" />
 
     <Button
         android:id="@+id/buttonCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cancel"
+        android:padding="12dp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/rounded_button"
+        android:layout_margin="5dp"
         android:layout_marginTop="8dp" />
 </LinearLayout>
